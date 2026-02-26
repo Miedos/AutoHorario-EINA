@@ -208,11 +208,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (checkActividad) {
     getItem("actividad")?.then((value) => {
+      const labelActivo = document.querySelector(".checkMark.feedback");
+      if (labelActivo) {
+        labelActivo.textContent = value === "true" ? "La extensión está activa, click para desactivar" : "La extensión está desactivada, click para activar";
+      }
       checkActividad.checked = value === "true";
     });
   
     checkActividad.addEventListener("change", () => {
-      setItem("actividad", checkActividad.checked ? "true" : "false");
+      const estado = checkActividad.checked ? "true" : "false";
+      const labelActivo = document.querySelector(".checkMark.feedback");
+      if (labelActivo) {
+        labelActivo.textContent = checkActividad.checked ? "La extensión está activada, click para desactivar" : "La extensión está desactivada, click para activar";
+      }
+      setItem("actividad", estado);
     });
   }
 });
