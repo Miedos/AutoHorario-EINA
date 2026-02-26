@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "AutoHorario - EINA",
+  "version": "0.7.8",
+  "description": "Rellena automáticamente el formulario de horarios, tiene en cuenta los grupos y asignaturas seleccionados, así como el trimestre. Tambien tiene modo para seleccionar del apartado de 'Buscar por Asignatura'",
+  "content_scripts": [
+    {
+      "matches": ["https://sia.unizar.es/pds/consultaPublica/look[conpub]*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "AutoHorario",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage"]
+}

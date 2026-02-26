@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="claro.css" id="linkSchema"/>
+  <title>AutoHorario</title>
+</head>
+<body>
+  <!-- HEADER DE LA EXTENSION -->
+  <header>AutoHorario</header>
+  <main>
+    <div class="checkMark-Activo">
+      <label for="checkActividad">La extensión está desactivada, click para activar</label>
+      <input type="checkbox" id="checkActividad" />
+    </div>
+    <div class="links">
+      <div class="color-row">
+        <label for="schemaColores">Estilo</label>
+        <select id="schemaColores">
+          <option value="claro" selected>Claro</option>
+          <option value="oscuro">Oscuro</option>
+          <option value="colorido">Colorido</option>
+          <option value="monocromatico">Monocromático</option>
+        </select>
+      </div>
+      <span>
+        <a class="btn-link" href="https://sia.unizar.es/pds/consultaPublica/look[conpub]InicioPubHora?entradaPublica=true" target="_blank">Entrar al calendario</a>
+      </span>
+    </div>
+
+    <!-- SECCION DE CONFIGURACION DE LA EXTENSION -->
+
+    <div class="spacer"></div>
+    <div>
+      <label for="selectorModo">Modo de Búsqueda</label>
+      <button class="selectorModoBtn active" id="BusquedaCurso" data-modo="curso">Búsqueda por Curso</button>
+      <button class="selectorModoBtn" id="BusquedaAsignatura" data-modo="asignaturas">Búsqueda por Asignatura</button>
+    </div>
+
+    <!-- MODO DE BUSQUEDA POR CURSO -->
+
+    <div id="modo-curso" class="modo-contenedor activo" style="display: block;">
+      <div>
+        <label for="planEstudio">Código de tu plan de estudio (Solo válido para EINA (CPS))</label>
+        <input id="planEstudio" type="text" placeholder="Escribe el código de tu plan de estudio" />
+        <hint class="hint">Ej: 439</hint>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="curso">Curso</label>
+        <input id="curso" type="text" placeholder="Escribe aqui el número de tu curso" />
+        <hint class="hint">Ej: 1, 2, 3, 4 ...</hint>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="trimestre">Trimestre</label>
+        <input id="trimestre" type="text" placeholder="Escribe el trimestre que quieras que se muestre" />
+        <hint class="hint">Ej: 1, 2, Ambos</hint>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="grupos">Grupos</label>
+        <input id="grupos" type="text" placeholder="Escribe los grupos que quieras que se muestren" />
+        <div class="hint">Separar con comas o espacios</div>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="asignaturas">Asignaturas</label>
+        <input id="asignaturas" type="text" placeholder="Escribe las asignaturas que quieras que se muestren" />
+        <div class="hint">Separar con comas o espacios</div>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <span class="hint">* Si quieres mostrar todos los grupos o asignaturas, deja el campo vacío</span>
+        <div></div>
+        <span class="hint">* El contenido se guarda automáticamente al cambiar los valores</span>
+      </div>
+    </div>
+  <!-- MODO DE BUSQUEDA POR ASIGNATURA -->
+
+    <div id="modo-asignaturas" class="modo-contenedor" style="display: none;">
+      <div>
+        <label for="asignaturaID">ID numérico de la asignatura</label>
+        <input id="asignaturaID" type="text" placeholder="Escribe el ID numérico de la asignatura que quieras mostrar" />
+        <hint class="hint">Ej: 30250</hint>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <span class="hint">* Puedes encontrar el ID numérico de una asignatura en el horario ya rellenado, es el número que sale al lado del nombre de la asignatura</span>
+        <div></div>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="asignaturaPlan">Código de tu plan de estudio (Solo válido para EINA (CPS))</label>
+        <input id="asignaturaPlan" type="text" placeholder="Escribe el código de tu plan de estudio" />
+        <hint class="hint">Ej: 439</hint>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="asignaturaTrimestre">Trimestre</label>
+        <input id="asignaturaTrimestre" type="text" placeholder="Escribe el trimestre que quieras que se muestre" />
+        <hint class="hint">Ej: 1, 2, Ambos</hint>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="asignaturaGrupos">Grupos</label>
+        <input id="asignaturaGrupos" type="text" placeholder="Escribe los grupos que quieras que se muestren" />
+        <div class="hint">Separar con comas o espacios</div>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <span class="hint">* Si quieres mostrar todos los grupos, deja el campo vacío</span>
+      </div>
+      <div class="spacer"></div>
+      <div>
+        <label for="asignaturasSaveButton" class="btn-asig save">Botón para guardar la asignatura a mostrar</label>
+          <button id="asignaturasSaveButton" class="btn-asig save">Guardar asignatura</button>
+        <label for="asignaturasGestionarButton" class="btn-asig gest">Botón para gestionar las asignaturas guardadas</label>
+          <button id="asignaturasGestionarButton" class="btn-asig gest">Gestionar asignaturas</button>
+      </div>
+
+    <!-- MODAL PARA LA LISTA DE ASIGNATURAS GUARDADAS -->
+
+    <div id="modalAsignaturas" class="modal hidden" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Gestión de asignaturas guardadas</h2>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div id="asignaturasGuardadasList" class="listaAsignaturas">
+          <!-- Aquí se mostrarán las asignaturas guardadas dinámicamente -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnEliminarTodas" class="btn-danger">Eliminar Todas</button>
+        <button id="btnCerrarModalFooter" class="btn-asig close">Cerrar</button>
+      </div>
+    </div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
