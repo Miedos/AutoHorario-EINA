@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "AutoHorario - EINA",
+  "version": "0.7.8",
+  "description": "Extensión de Chrome y Firefox que automatiza el relleno del formulario de horarios de UNIZAR EINA (CPS). Define una sola vez tu curso o asignaturas en la configuración y visualiza el horario instantáneamente sin rellenar manualmente cada vez. Open source. (No afiliado con UNIZAR)",
+  "content_scripts": [
+    {
+      "matches": ["https://sia.unizar.es/pds/consultaPublica/look[conpub]*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_title": "AutoHorario",
+    "default_popup": "popup.html",
+    "default_icon": "icon128.png"
+  },
+  "permissions": ["storage"],
+  "applications": {
+    "gecko": {
+      "id": "autohorario@DanielGallan.dev",
+      "strict_min_version": "68.0"
+    }
+  }
+}
